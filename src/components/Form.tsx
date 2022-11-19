@@ -1,20 +1,22 @@
 import { useState } from "react"
 import Cliente from "../core/Cliente"
+import Button from "./Button"
 import Input from "./Input"
 
 // if the cliente has an ID, it means that I'm not creating one, but modifying it. 
 interface FormProps {
     cliente: Cliente
+    canceled?: () => void
 }
 
 
-const Form = ({cliente}: FormProps) => {
+const Form = ({cliente, canceled}: FormProps) => {
 
     const id = cliente?.Id // Checking if ID exists
     const [name, setName] = useState(cliente?.Nome ?? '')
     const [age, setAge] = useState(cliente?.Idade ?? 0)
 
-    
+
 
     return (
         <div>
@@ -40,6 +42,15 @@ const Form = ({cliente}: FormProps) => {
                 value={age}
                 onChange={setAge}
             />
+
+            <div className="flex justify-end mt-7">
+                <Button className="mr-2">
+                    {id ? 'Alterar' : 'Salvar'}
+                </Button>
+                <Button handleClick={canceled}>
+                    Cancelar
+                </Button>
+            </div>
         </div>
   )
 }

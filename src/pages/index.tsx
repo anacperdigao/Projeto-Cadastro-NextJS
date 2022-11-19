@@ -8,6 +8,8 @@ import Cliente from "../core/Cliente";
 
 export default function Home() {
 
+  const [visible, setVisible] = useState<'table' | 'form'>('table')
+
   const clientes = [
     new Cliente('Ana', 30, '1'),
     new Cliente('Bia', 45, '2'),
@@ -29,15 +31,27 @@ export default function Home() {
     bg-gradient-to-r from-blue-500 to-purple-500 text-white`} >
 
       <Layout titulo="Cadastro Simples">
-        <div className="flex justify-end">
-          <Button className="mb-4">Novo Cliente</Button>
-        </div>
-        {/* <Table 
-          clientes={clientes} 
-          clienteSelecionado={clienteSelecionado}
-          clienteExcluido={clienteExcluido} 
-        /> */}
-        <Form />
+        {visible === 'table'
+        ?
+        <>
+          <div className="flex justify-end">
+            <Button className="mb-4" handleClick={() => setVisible('form')}>Novo Cliente</Button>
+          </div>
+          <Table 
+            clientes={clientes} 
+            clienteSelecionado={clienteSelecionado}
+            clienteExcluido={clienteExcluido} 
+          />
+        </>
+        :
+        <Form
+        cliente={clientes[0]}
+        canceled={() => setVisible('table')}
+        />
+        }
+
+
+
       </Layout>
 
 
