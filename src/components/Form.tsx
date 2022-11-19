@@ -6,11 +6,12 @@ import Input from "./Input"
 // if the cliente has an ID, it means that I'm not creating one, but modifying it. 
 interface FormProps {
     cliente: Cliente
+    onClientChange?: (cliente: Cliente) => void
     canceled?: () => void
 }
 
 
-const Form = ({cliente, canceled}: FormProps) => {
+const Form = ({cliente, canceled, onClientChange}: FormProps) => {
 
     const id = cliente?.Id // Checking if ID exists
     const [name, setName] = useState(cliente?.Nome ?? '')
@@ -44,9 +45,10 @@ const Form = ({cliente, canceled}: FormProps) => {
             />
 
             <div className="flex justify-end mt-7">
-                <Button className="mr-2">
+                <Button className="mr-2" handleClick={() => onClientChange?.(new Cliente(name, +age, id))}>
                     {id ? 'Alterar' : 'Salvar'}
                 </Button>
+
                 <Button handleClick={canceled}>
                     Cancelar
                 </Button>
