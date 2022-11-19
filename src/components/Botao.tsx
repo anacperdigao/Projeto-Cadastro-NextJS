@@ -1,13 +1,16 @@
 interface BotaoProps {
     className?: string
     children: any
+    setMostraForm: (arg: boolean) => void
 }
 
 
-const Botao = ({children, className}: BotaoProps) => {
+const Botao = ({children, className, setMostraForm}: BotaoProps) => {
 
   return (
-    <button className={`bg-gradient-to-r from-green-500 to-green-700 
+    <button
+    onClick={() => setMostraForm(true)} 
+    className={`bg-gradient-to-r from-green-500 to-green-700 
     text-white px-4 py-2 rounded-md ${className}`}>
         {children}
     </button>

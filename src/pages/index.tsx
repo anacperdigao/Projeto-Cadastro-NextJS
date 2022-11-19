@@ -1,10 +1,14 @@
+import { useState } from "react";
 import Botao from "../components/Botao";
+import Formulario from "../components/Formulario";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
 import Cliente from "../core/Cliente";
 
 
 export default function Home() {
+
+  const [mostraForm, setMostraForm] = useState(false)
 
   const clientes = [
     new Cliente('Ana', 30, '1'),
@@ -26,12 +30,14 @@ export default function Home() {
     <div className={`flex justify-center items-center h-screen 
     bg-gradient-to-r from-blue-500 to-purple-500 text-white`} >
 
+      {mostraForm
+      ?
+      <Formulario />
+      :
       <Layout titulo="Cadastro Simples">
-
         <div className="flex justify-end">
-          <Botao className="mb-4">Novo Cliente</Botao>
+          <Botao className="mb-4" setMostraForm={setMostraForm}>Novo Cliente</Botao>
         </div>
-
         <Tabela 
           clientes={clientes} 
           clienteSelecionado={clienteSelecionado}
@@ -39,6 +45,8 @@ export default function Home() {
         />
 
       </Layout>
+      }
+
 
     </div>
   )
