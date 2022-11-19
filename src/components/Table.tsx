@@ -1,13 +1,13 @@
 import Cliente from "../core/Cliente"
-import { IconeEdicao, IconeLixo } from "./Icones"
+import { IconEdit, IconTrash } from "./Icons"
 
-interface TabelaProps{
+interface TableProps{
     clientes: Cliente[]
     clienteSelecionado?: (cliente: Cliente) => void
     clienteExcluido?: (cliente: Cliente) => void
 }
 
-const Tabela = ({clientes, clienteSelecionado, clienteExcluido}: TabelaProps) => {
+const Table = ({clientes, clienteSelecionado, clienteExcluido}: TableProps) => {
 
     const exibirAcoes = clienteSelecionado || clienteExcluido
 
@@ -55,7 +55,7 @@ const Tabela = ({clientes, clienteSelecionado, clienteExcluido}: TabelaProps) =>
                 onClick={() => clienteSelecionado?.(cliente)}
                 className={`flex justify-center items-center text-green-600 
                 rounded-full hover:bg-purple-50 p-2 m-1`}>
-                    {IconeEdicao}
+                    {IconEdit}
                 </button>
                 }
  
@@ -65,7 +65,7 @@ const Tabela = ({clientes, clienteSelecionado, clienteExcluido}: TabelaProps) =>
                 onClick={() => clienteExcluido?.(cliente)} 
                 className={`flex justify-center items-center text-red-500 
                 rounded-full hover:bg-purple-50 p-2 m-1`}>
-                    {IconeLixo}
+                    {IconTrash}
                 </button>
                 }
 
@@ -90,4 +90,4 @@ const Tabela = ({clientes, clienteSelecionado, clienteExcluido}: TabelaProps) =>
     )
 }
 
-export default Tabela
+export default Table

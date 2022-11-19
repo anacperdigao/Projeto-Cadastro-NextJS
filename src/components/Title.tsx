@@ -1,10 +1,10 @@
 
-interface TituloProps {
+interface TitleProps {
     children: string
 }
 
 
-const Titulo = (props: TituloProps) => {
+const Title = (props: TitleProps) => {
 
   return (
 
@@ -18,4 +18,4 @@ const Titulo = (props: TituloProps) => {
   )
 }
 
-export default Titulo
+export default Title
