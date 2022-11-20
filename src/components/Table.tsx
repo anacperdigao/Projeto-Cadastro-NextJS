@@ -3,13 +3,13 @@ import { IconEdit, IconTrash } from "./Icons"
 
 interface TableProps{
     clientes: Cliente[]
-    clienteSelecionado?: (cliente: Cliente) => void
+    selectedClient?: (cliente: Cliente) => void
     clienteExcluido?: (cliente: Cliente) => void
 }
 
-const Table = ({clientes, clienteSelecionado, clienteExcluido}: TableProps) => {
+const Table = ({clientes, selectedClient, clienteExcluido}: TableProps) => {
 
-    const exibirAcoes = clienteSelecionado || clienteExcluido
+    const exibirAcoes = selectedClient || clienteExcluido
 
     function renderizarCabecalho() {
         return(
@@ -49,10 +49,10 @@ const Table = ({clientes, clienteSelecionado, clienteExcluido}: TableProps) => {
         return(
             <td className="flex justify-center">
 
-                {clienteSelecionado
+                {selectedClient
                 &&                 
                 <button 
-                onClick={() => clienteSelecionado?.(cliente)}
+                onClick={() => selectedClient?.(cliente)}
                 className={`flex justify-center items-center text-green-600 
                 rounded-full hover:bg-purple-50 p-2 m-1`}>
                     {IconEdit}

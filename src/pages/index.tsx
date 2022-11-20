@@ -1,38 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ClientCollection from "../backend/db/ClientCollection";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import Cliente from "../core/Cliente";
+import ClienteRepositorio from "../core/ClienteRepositorio";
 
 
 export default function Home() {
 
+  const repo: ClienteRepositorio = new ClientCollection() 
+
   const [cliente, setCliente] = useState<Cliente>(Cliente.Vazio())
+  const [clientes, setClientes] = useState<Cliente[]>([])
   const [visible, setVisible] = useState<'table' | 'form'>('table')
 
-  const clientes = [
-    new Cliente('Ana', 30, '1'),
-    new Cliente('Bia', 45, '2'),
-    new Cliente('Carlos', 23, '3'),
-    new Cliente('Pedro', 54, '4'),
-  ]
 
-  const clienteSelecionado = (cliente: Cliente) => {
+  useEffect(() => {
+    obterTodos
+  }, [])
+
+  const obterTodos = () => {
+    repo.obterTodos().then(clientes => {
+      setClientes(clientes)
+      setVisible('table')
+    })
+  }
+
+
+  function selectedClient (cliente: Cliente) {
     setCliente(cliente)
     setVisible('form')
   }
 
-  const clienteExcluido = (cliente: Cliente) => {
-    console.log(cliente.Nome)
+  async function clienteExcluido (cliente: Cliente) {
+    await repo.excluir(cliente)
+    obterTodos()
   }
 
-  const saveClient = (cliente: Cliente) => {
-    console.log(cliente)
-    setVisible('table')
+  async function saveClient (cliente: Cliente) {
+    await repo.salvar(cliente)
+    obterTodos()
   }
 
-  const newClient = () => {
+  function newClient () {
     setCliente(Cliente.Vazio())
     setVisible('form')
   }
@@ -51,7 +63,7 @@ export default function Home() {
           </div>
           <Table 
             clientes={clientes} 
-            clienteSelecionado={clienteSelecionado}
+            selectedClient={selectedClient}
             clienteExcluido={clienteExcluido} 
           />
         </>

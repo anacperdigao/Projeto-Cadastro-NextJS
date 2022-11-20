@@ -14,8 +14,8 @@ interface FormProps {
 const Form = ({cliente, canceled, onClientChange}: FormProps) => {
 
     const id = cliente?.Id // Checking if ID exists
-    const [name, setName] = useState(cliente?.Nome ?? '')
-    const [age, setAge] = useState(cliente?.Idade ?? 0)
+    const [nome, setNome] = useState(cliente?.Nome ?? '')
+    const [idade, setIdade] = useState(cliente?.Idade ?? 0)
 
 
 
@@ -34,18 +34,18 @@ const Form = ({cliente, canceled, onClientChange}: FormProps) => {
             <Input 
                 text="Nome" 
                 type="text" 
-                value={name}
-                onChange={setName}
+                value={nome}
+                onChange={setNome}
             />
             <Input 
                 text="Idade" 
                 type="number" 
-                value={age}
-                onChange={setAge}
+                value={idade}
+                onChange={setIdade}
             />
 
             <div className="flex justify-end mt-7">
-                <Button className="mr-2" handleClick={() => onClientChange?.(new Cliente(name, +age, id))}>
+                <Button className="mr-2" handleClick={() => onClientChange?.(new Cliente(nome, +idade, id))}>
                     {id ? 'Alterar' : 'Salvar'}
                 </Button>
 
