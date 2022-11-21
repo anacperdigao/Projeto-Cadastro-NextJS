@@ -16,8 +16,11 @@ const useClientes = () => {
   
   
     useEffect(() => {
-      obterTodos
-    }, [])
+      repo.obterTodos().then(clientes => {
+        setClientes(clientes)
+        setVisible('table')
+      })
+    }, [setClientes])
 
   
     const obterTodos = () => {
