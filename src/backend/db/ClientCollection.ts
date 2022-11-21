@@ -27,7 +27,7 @@ export default class ClientCollection implements ClienteRepositorio {
         } else {
             const docRef = await this.colecao().add(cliente)
             const doc = await docRef.get()
-            return doc.data()
+            return doc.data()!
         }
     }
 
