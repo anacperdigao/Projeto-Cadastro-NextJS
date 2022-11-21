@@ -33,9 +33,9 @@ const Table = ({clientes, selectedClient, clienteExcluido}: TableProps) => {
             clientes?.map((cliente, index) => {
                 return(
                     <tr key={cliente.Id} className={`${index % 2 === 0 ? 'bg-purple-200' : 'bg-purple-100'}`}>
-                        <td className="text-left p-4">{cliente.Id}</td>
-                        <td className="text-left p-4">{cliente.Nome}</td>
-                        <td className="text-left p-4">{cliente.Idade}</td>
+                        <td className="text-left p-4 max-[480px]:p-2">{cliente.Id.slice(0,7)}</td>
+                        <td className="text-left p-4 max-[480px]:p-2">{cliente.Nome}</td>
+                        <td className="text-left p-4 max-[480px]:p-2 max-[480px]:text-center ">{cliente.Idade}</td>
                         {exibirAcoes && renderizarAcoes(cliente)}
                     </tr>
                 )
@@ -54,7 +54,7 @@ const Table = ({clientes, selectedClient, clienteExcluido}: TableProps) => {
                 <button 
                 onClick={() => selectedClient?.(cliente)}
                 className={`flex justify-center items-center text-green-600 
-                rounded-full hover:bg-purple-50 p-2 m-1`}>
+                rounded-full hover:bg-purple-50 p-2 m-1 max-[480px]:p-1`}>
                     {IconEdit}
                 </button>
                 }
@@ -64,7 +64,7 @@ const Table = ({clientes, selectedClient, clienteExcluido}: TableProps) => {
                 <button 
                 onClick={() => clienteExcluido?.(cliente)} 
                 className={`flex justify-center items-center text-red-500 
-                rounded-full hover:bg-purple-50 p-2 m-1`}>
+                rounded-full hover:bg-purple-50 p-2 m-1 max-[480px]:p-1`}>
                     {IconTrash}
                 </button>
                 }
@@ -75,7 +75,7 @@ const Table = ({clientes, selectedClient, clienteExcluido}: TableProps) => {
 
 
     return (
-        <table className="w-full rounded-xl overflow-hidden">
+        <table className="w-full rounded-xl overflow-hidden max-[480px]:text-xs">
             <thead className={`
                 text-gray-100 
                 bg-gradient-to-r from-purple-500 to-purple-800`
