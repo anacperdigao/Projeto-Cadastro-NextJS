@@ -3,7 +3,6 @@ import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import useClientes from "../hooks/useClientes";
-import useTableOrForm from "../hooks/useTableOrForm";
 
 
 export default function Home() {
