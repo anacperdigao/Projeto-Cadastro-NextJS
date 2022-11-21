@@ -1,53 +1,23 @@
-import { useEffect, useState } from "react";
-import ClientCollection from "../backend/db/ClientCollection";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
-import Cliente from "../core/Cliente";
-import ClienteRepositorio from "../core/ClienteRepositorio";
+import useClientes from "../hooks/useClientes";
+import useTableOrForm from "../hooks/useTableOrForm";
 
 
 export default function Home() {
 
-  const repo: ClienteRepositorio = new ClientCollection() 
-
-  const [cliente, setCliente] = useState<Cliente>(Cliente.Vazio())
-  const [clientes, setClientes] = useState<Cliente[]>([])
-  const [visible, setVisible] = useState<'table' | 'form'>('table')
-
-
-  useEffect(() => {
-    obterTodos
-  }, [])
-
-  const obterTodos = () => {
-    repo.obterTodos().then(clientes => {
-      setClientes(clientes)
-      setVisible('table')
-    })
-  }
-
-
-  function selectedClient (cliente: Cliente) {
-    setCliente(cliente)
-    setVisible('form')
-  }
-
-  async function clienteExcluido (cliente: Cliente) {
-    await repo.excluir(cliente)
-    obterTodos()
-  }
-
-  async function saveClient (cliente: Cliente) {
-    await repo.salvar(cliente)
-    obterTodos()
-  }
-
-  function newClient () {
-    setCliente(Cliente.Vazio())
-    setVisible('form')
-  }
+  const { 
+    newClient, 
+    saveClient, 
+    clienteExcluido, 
+    selectedClient, 
+    cliente, 
+    clientes,
+    visible,
+    setVisible
+  } = useClientes()
 
   
   return (
@@ -75,10 +45,7 @@ export default function Home() {
         />
         }
 
-
-
       </Layout>
-
 
     </div>
   )
